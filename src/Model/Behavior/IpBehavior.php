@@ -20,6 +20,23 @@ class IpBehavior extends Behavior
         'fields' => ['ip' => 'new'],
     ];
 
+    public function initialize(array $config)
+    {
+        parent::initialize($config);
+
+        if (isset($config['fields'])) {
+            $result = [];
+            foreach ((array)$config['fields'] as $field => $when) {
+                if (is_int($field)) {
+                    $field = $when;
+                    $when = 'new';
+                }
+                $result[$field] = $when;
+            }
+            $this->config('fields', $result, false);
+        }
+    }
+
     public function beforeSave(Event $event, EntityInterface $entity)
     {
         if ($entity === null) {
