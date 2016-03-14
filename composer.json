@@ -1,0 +1,39 @@
+{
+    "name": "thefredfox/cakephp-ip-behavior",
+    "description": "IpType plugin for CakePHP",
+    "homepage": "http://github.com/thefredfox/cakephp-ip-type",
+    "type": "cakephp-plugin",
+    "license": "MIT",
+    "keywords": [
+        "php",
+        "cakephp",
+        "ip",
+        "behavior",
+        "database"
+    ],
+    "authors": [
+        {
+            "name": "TheFRedFox",
+            "email": "thefredfox@googlemail.com",
+            "role": "Maintainer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.16",
+        "cakephp/cakephp": "~3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "IpBehavior\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "IpBehavior\\Test\\": "tests",
+            "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
+        }
+    }
+}

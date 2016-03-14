@@ -1,0 +1,11 @@
+# CakePHP 3
+
+vendor/*
+tmp/*
+logs/*
+
+# JetBrains IDE
+.idea/
+
+# Composer
+composer.lock
