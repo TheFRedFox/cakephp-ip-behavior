@@ -22,13 +22,14 @@ class IpsFixture extends TestFixture
         'id' => ['type' => 'integer'],
         'content' => ['type' => 'string', 'length' => 16, 'null' => true],
         'ip' => ['type' => 'string', 'length' => 16, 'null' => true],
+        'other_ip_field' => ['type' => 'string', 'length' => 16, 'null' => true],
         '_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]]
     ];
 
     public function __construct($connection = null)
     {
         $this->records = [
-            ['id' => 1, 'content' => 'init content', 'ip' => '127.0.0.1']
+            ['id' => 1, 'content' => 'init content', 'ip' => '127.0.0.1', 'other_ip_field' => '127.0.0.2']
         ];
 
         if ($connection) {

@@ -2,6 +2,7 @@
 
 namespace TestApp\Controller;
 
+use Cake\Log\Log;
 use IpBehavior\Model\Behavior\IpBehavior;
 use TestApp\Model\Table\IpsTable;
 
@@ -56,8 +57,9 @@ class IpsController extends AppController
         $entity = $this->Ips->get($id);
 
         /** @var IpBehavior $behavior */
-        $behavior = $this->Ips->behaviors()->get('Ip');
-        $behavior->config('fields', ['ip' => 'always']);
+        $this->Ips->removeBehavior('Ip');
+        Log::debug($this->Ips->behaviors()->loaded());
+        $this->Ips->addBehavior('IpBehavior.Ip', ['fields' => ['ip' => 'always']]);
 
         if ($this->request->is(['post', 'put'])) {
             $entity = $this->Ips->patchEntity($entity, $this->request->data());
@@ -70,8 +72,88 @@ class IpsController extends AppController
         $entity = $this->Ips->get($id);
 
         /** @var IpBehavior $behavior */
-        $behavior = $this->Ips->behaviors()->get('Ip');
-        $behavior->config('fields', ['ip' => 'bad_value']);
+        $this->Ips->removeBehavior('Ip');
+        $this->Ips->addBehavior('IpBehavior.Ip', ['fields' => ['ip' => 'bad_value']]);
+
+        if ($this->request->is(['post', 'put'])) {
+            $entity = $this->Ips->patchEntity($entity, $this->request->data());
+            $this->Ips->save($entity);
+        }
+    }
+
+    public function addOtherField()
+    {
+        /** @var IpBehavior $behavior */
+        $this->Ips->removeBehavior('Ip');
+        $this->Ips->addBehavior('IpBehavior.Ip', ['fields' => ['other_ip_field']]);
+
+        if ($this->request->is(['post'])) {
+            $entity = $this->Ips->newEntity($this->request->data());
+            $this->Ips->save($entity);
+        }
+    }
+
+    public function editOtherField($id)
+    {
+        $entity = $this->Ips->get($id);
+
+        /** @var IpBehavior $behavior */
+        $this->Ips->removeBehavior('Ip');
+        $this->Ips->addBehavior('IpBehavior.Ip', ['fields' => ['other_ip_field']]);
+
+        if ($this->request->is(['post', 'put'])) {
+            $entity = $this->Ips->patchEntity($entity, $this->request->data());
+            $this->Ips->save($entity);
+        }
+    }
+
+    public function editOtherFieldWhenAlways($id)
+    {
+        $entity = $this->Ips->get($id);
+
+        /** @var IpBehavior $behavior */
+        $this->Ips->removeBehavior('Ip');
+        $this->Ips->addBehavior('IpBehavior.Ip', ['fields' => ['other_ip_field' => 'always']]);
+
+        if ($this->request->is(['post', 'put'])) {
+            $entity = $this->Ips->patchEntity($entity, $this->request->data());
+            $this->Ips->save($entity);
+        }
+    }
+
+    public function editOtherFieldWhenBadValue($id)
+    {
+        $entity = $this->Ips->get($id);
+
+        /** @var IpBehavior $behavior */
+        $this->Ips->removeBehavior('Ip');
+        $this->Ips->addBehavior('IpBehavior.Ip', ['fields' => ['other_ip_field' => 'bad_value']]);
+
+        if ($this->request->is(['post', 'put'])) {
+            $entity = $this->Ips->patchEntity($entity, $this->request->data());
+            $this->Ips->save($entity);
+        }
+    }
+
+    public function addTwoFields()
+    {
+        /** @var IpBehavior $behavior */
+        $this->Ips->removeBehavior('Ip');
+        $this->Ips->addBehavior('IpBehavior.Ip', ['fields' => ['ip', 'other_ip_field' => 'always']]);
+
+        if ($this->request->is(['post'])) {
+            $entity = $this->Ips->newEntity($this->request->data());
+            $this->Ips->save($entity);
+        }
+    }
+
+    public function editTwoFields($id)
+    {
+        /** @var IpBehavior $behavior */
+        $this->Ips->removeBehavior('Ip');
+        $this->Ips->addBehavior('IpBehavior.Ip', ['fields' => ['ip', 'other_ip_field' => 'always']]);
+
+        $entity = $this->Ips->get($id);
 
         if ($this->request->is(['post', 'put'])) {
             $entity = $this->Ips->patchEntity($entity, $this->request->data());
