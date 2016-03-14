@@ -1,7 +1,7 @@
 {
     "name": "thefredfox/cakephp-ip-behavior",
-    "description": "IpType plugin for CakePHP",
-    "homepage": "http://github.com/thefredfox/cakephp-ip-type",
+    "description": "IpBehavior plugin for CakePHP",
+    "homepage": "http://github.com/thefredfox/cakephp-ip-behavior",
     "type": "cakephp-plugin",
     "license": "MIT",
     "keywords": [
